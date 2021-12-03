@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics, status
+from rest_framework import generics, status,views
 from .serializers import RegisterSerializer, LoginSerializer, EmailVerificationSerializer
 from rest_framework.response import Response
 from .models import User
@@ -10,6 +10,9 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 import jwt
 from django.conf import settings
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+
 
 class RegisterView(generics.GenericAPIView):
 
@@ -40,7 +43,10 @@ class RegisterView(generics.GenericAPIView):
         return Response(user_data, status=status.HTTP_201_CREATED)
 
 
-class VerifyEmail(generics.GenericAPIView):
+class VerifyEmail(views.APIView):
+    serializer_class = EmailVerificationSerializer
+    token_param_config=openapi.Parameter('token', in_=openapi.IN_QUERY, description='Description',type=openapi.TYPE_STRING)
+    @swagger_auto_schema(manual_parameters=[token_param_config])
     def get(self, request):
         token = request.GET.get('token')
         try:
@@ -63,4 +69,4 @@ class LoginView(generics.GenericAPIView):
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
-        return Response(serializer.data, status=status.HTTP_200_ok)
+        return Response(serializer.data, status=status.HTTP_200_OK)
