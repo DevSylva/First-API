@@ -32,15 +32,24 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=255, unique=True, db_index=True)
-    email = models.EmailField(max_length=255, unique=True, db_index=True)
-    first_name = models.CharField(max_length=255, null=True)
-    last_name = models.CharField(max_length=255, null=True)
-    is_verified = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    username = models.CharField(
+        max_length=255, unique=True, db_index=True)
+    email = models.EmailField(
+        max_length=255, unique=True, db_index=True)
+    first_name = models.CharField(
+        max_length=255, null=True)
+    last_name = models.CharField(
+        max_length=255, null=True)
+    is_verified = models.BooleanField(
+        default=False)
+    is_active = models.BooleanField(
+        default=True)
+    is_staff = models.BooleanField(
+        default=False)
+    created_at = models.DateTimeField(
+        auto_now_add=True)
+    updated_at = models.DateTimeField(
+        auto_now=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
