@@ -37,7 +37,7 @@ class RegisterView(generics.GenericAPIView):
             'to_email': user.email,
             'email_subject': "Verify your email",
         }
-        # Util.send_email(data) uncomment only when connect to the internet to avoid errors
+        Util.send_email(data)
         print("email has been sent successfully")
 
         return Response(user_data, status=status.HTTP_201_CREATED)
