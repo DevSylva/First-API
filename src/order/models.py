@@ -23,7 +23,7 @@ class Order(models.Model):
         to=User, on_delete=models.CASCADE
     )
     status = models.CharField(
-        choices=STATUS, max_length=20, default=status[0]
+        choices=STATUS, max_length=20, default=STATUS[0]
     )
     condition = models.CharField(
         choices=CONDITION, max_length=30, null=True
