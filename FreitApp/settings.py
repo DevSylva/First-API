@@ -189,12 +189,3 @@ DATABASES['default'].update(prod_db)
 
 django_heroku.settings(locals())
 
-# this was the error coming from my whitenoise configuration
-"""
-ImportError at /
-
-Your WhiteNoise configuration is incompatible with WhiteNoise v4.0
-This can be fixed by following the upgrade instructions at:
-https://whitenoise.evans.io/en/stable/changelog.html#v4-0
-
-"""
