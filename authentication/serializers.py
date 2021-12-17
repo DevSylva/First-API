@@ -5,9 +5,9 @@ from rest_framework.exceptions import AuthenticationFailed
 
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(max_length=68, min_length=6, write_only=True)
-    first_name=serializers.CharField(max_length=68, min_length=6, write_only=True)
-    last_name=serializers.CharField(max_length=68, min_length=6, write_only=True)
+    password = serializers.CharField(max_length=68, min_length=4, write_only=True)
+    first_name=serializers.CharField(max_length=68, write_only=True)
+    last_name=serializers.CharField(max_length=68, write_only=True)
 
     class Meta:
         model = User
