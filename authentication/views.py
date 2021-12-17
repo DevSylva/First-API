@@ -17,7 +17,7 @@ from drf_yasg import openapi
 class RegisterView(generics.GenericAPIView):
 
     serializer_class = RegisterSerializer
-    renderer_classes = (UserRenderer)
+    # renderer_classes = (UserRenderer)
 
     def post(self, request):
         user = request.data
@@ -44,14 +44,13 @@ class RegisterView(generics.GenericAPIView):
 
 
 class VerifyEmail(views.APIView):
-    permission_classes = [AllowAny]
     serializer_class = EmailVerificationSerializer
     token_param_config=openapi.Parameter('token', in_=openapi.IN_QUERY, description='Description',type=openapi.TYPE_STRING)
     @swagger_auto_schema(manual_parameters=[token_param_config])
     def get(self, request):
         token = request.GET.get('token')
         try:
-            payload=jwt.decode(token, settings.SECRET_KEY, algorithms='HS256')
+            payload=jwt.decode(token, settings.SECRET_KEY)
             user=User.objects.get(id=payload['user_id'])
             if not user.is_verified:
                 user.is_verified = True
