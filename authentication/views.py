@@ -17,7 +17,7 @@ from drf_yasg import openapi
 class RegisterView(generics.GenericAPIView):
 
     serializer_class = RegisterSerializer
-    # renderer_classes = (UserRenderer)
+    renderer_classes = (UserRenderer)
 
     def post(self, request):
         user = request.data
