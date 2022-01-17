@@ -3,7 +3,7 @@ from authentication.models import User
 from driver.models import Driver
 
 # Create your models here.
-class Order(models.Model):
+class Orders(models.Model):
 
     STATUS = (
         ('PENDING', 'Pending'),

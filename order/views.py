@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .serializers import OrderSerializer
-from .models import Order
+from .models import Orders
 from .permissions import IsOwner
 from rest_framework import permissions
 
 # Create your views here.
 class OrderListAPIView(ListCreateAPIView):
     serializer_class = OrderSerializer
-    queryset = Order.objects.all()
+    queryset = Orders.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
@@ -19,7 +19,7 @@ class OrderListAPIView(ListCreateAPIView):
 
 class OrderDetailAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = OrderSerializer
-    queryset = Order.objects.all()
+    queryset = Orders.objects.all()
     permission_classes = (permissions.IsAuthenticated, IsOwner)
     lookup_field = 'id'
 
